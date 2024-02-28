@@ -15,9 +15,9 @@ cd bnt-auth
 
 ## Usage (Windows)
 
-```
+
 1. Retrieve SSO Token:
-Go to https://account.battle.net/login/en/?ref=localhost. After logging in, ignore the 404 Error, but copy the token following ST= from the URL.
+Go to [https://account.battle.net/login/en/?ref=localhost](https://account.battle.net/login/en/?ref=localhost). After logging in, ignore the 404 Error, but copy the token following ST= from the URL.
 Example: EU-84902f44j57m687039586j7egdfa0a54-1165739690
 
 2. Get Bearer Token:
@@ -31,11 +31,12 @@ Responce should be
 {"serial":"XXX","restoreCode":"XXX","deviceSecret":"XXX","timeMs":0,"requireHealup":false}
 
 4. Winauth
-Download Winauth https://winauth.github.io/winauth/download.html
+Download Winauth at [https://winauth.github.io/winauth/download.html](https://winauth.github.io/winauth/download.html)
 Add - Battle.Net - Import Authenticator - Private Key
 Private Key is deviceSecret, just put it in
-```
 
+### Usage example
+[Watch on streamable](https://streamable.com/rr47e6)
 ## Contributing
 
 Pull requests are welcome. For major changes, please open an issue first
