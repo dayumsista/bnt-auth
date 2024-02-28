@@ -15,7 +15,7 @@ cd bnt-auth
 
 ## Usage (Windows)
 
-```python
+```
 1. Retrieve SSO Token:
 Go to https://account.battle.net/login/en/?ref=localhost. After logging in, ignore the 404 Error, but copy the token following ST= from the URL.
 Example: EU-84902f44j57m687039586j7egdfa0a54-1165739690
