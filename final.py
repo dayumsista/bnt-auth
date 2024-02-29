@@ -41,8 +41,6 @@ print(restoreCode)
 print(deviceSecret)
 
 import os
-import os
-
 
 data_list = [
     serial,
