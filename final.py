@@ -23,14 +23,23 @@ access_token = response_json.get('access_token')
 if not access_token:
     print("Access token not found in the response.")
     exit()
+    
+serial = input("Please enter your serial: ")
+restoreCode = input("Please enter your restoreCode: ")
 
-url = "https://authenticator-rest-api.bnet-identity.blizzard.net/v1/authenticator"
+url = 'https://authenticator-rest-api.bnet-identity.blizzard.net/v1/authenticator/device'
 headers = {
-    "accept": "application/json",
+    'accept': 'application/json',
+    'Content-Type': 'application/json',
     "Authorization": f"Bearer {access_token}"  
 }
-response = requests.post(url, headers=headers)
 
+data = {
+  "restoreCode": restoreCode, 
+  "serial": serial  
+}
+
+response = requests.post(url, headers=headers)
 auth_response_json = response.json()
 serial = auth_response_json.get('serial')
 restoreCode = auth_response_json.get('restoreCode')
@@ -40,6 +49,7 @@ print(serial)
 print(restoreCode)
 print(deviceSecret)
 
+import sys
 import os
 
 data_list = [
@@ -48,7 +58,12 @@ data_list = [
     deviceSecret
 ]
 
-file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "bntAuth.txt")
+if getattr(sys, 'frozen', False):
+    application_path = os.path.dirname(sys.executable)
+else:
+    application_path = os.path.dirname(os.path.abspath(__file__))
+
+file_path = os.path.join(application_path, "bntAuth.txt")
 
 file_exists_and_not_empty = os.path.isfile(file_path) and os.path.getsize(file_path) > 0
 
@@ -58,8 +73,7 @@ with open(file_path, "a") as f:
     for item in data_list:
         f.write(item + "\n")
 
-
-time.sleep(2)  
+time.sleep(2)
 
 print("Data saved.")
 
