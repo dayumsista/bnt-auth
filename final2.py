@@ -71,4 +71,7 @@ time.sleep(2)
 
 print("Data saved.")
 
+time.sleep(2)
+input("Press Enter to exit...")
+
 #https://account.battle.net/login/en/?ref=localhost
