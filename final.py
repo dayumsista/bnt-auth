@@ -1,6 +1,5 @@
 import requests
 import time
-
 url = 'https://oauth.battle.net/oauth/sso'
 headers = {
     'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8'
@@ -14,37 +13,23 @@ data = {
 }
 response = requests.post(url, headers=headers, data=data)
 response_json = response.json()
-
 if 'error' in response_json and response_json['error'] == 'invalid_token':
     print("Invalid SSO token!")
     exit()
-
 access_token = response_json.get('access_token')
 if not access_token:
     print("Access token not found in the response.")
     exit()
-    
-serial = input("Please enter your serial: ")
-restoreCode = input("Please enter your restoreCode: ")
-
-url = 'https://authenticator-rest-api.bnet-identity.blizzard.net/v1/authenticator/device'
+url = "https://authenticator-rest-api.bnet-identity.blizzard.net/v1/authenticator"
 headers = {
-    'accept': 'application/json',
-    'Content-Type': 'application/json',
+    "accept": "application/json",
     "Authorization": f"Bearer {access_token}"  
 }
-
-data = {
-  "restoreCode": restoreCode, 
-  "serial": serial  
-}
-
 response = requests.post(url, headers=headers)
 auth_response_json = response.json()
 serial = auth_response_json.get('serial')
 restoreCode = auth_response_json.get('restoreCode')
 deviceSecret = auth_response_json.get('deviceSecret')
-
 print(serial)
 print(restoreCode)
 print(deviceSecret)
