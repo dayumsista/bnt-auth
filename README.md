@@ -41,7 +41,7 @@ Add - Battle.Net - Import Authenticator - Private Key
 Private Key is deviceSecret, just put it in
 
 ### Usage example
-[Watch on streamable](https://streamable.com/ncodz4)
+[Watch on streamable](https://streamable.com/t131hj)
 ## Contributing
 
 Pull requests are welcome. For major changes, please open an issue first
