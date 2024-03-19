@@ -48,6 +48,7 @@ print(serial)
 print(restoreCode)
 print(deviceSecret)
 
+import sys
 import os
 
 data_list = [
@@ -56,7 +57,12 @@ data_list = [
     deviceSecret
 ]
 
-file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "bntAuth.txt")
+if getattr(sys, 'frozen', False):
+    application_path = os.path.dirname(sys.executable)
+else:
+    application_path = os.path.dirname(os.path.abspath(__file__))
+
+file_path = os.path.join(application_path, "bntAuth.txt")
 
 file_exists_and_not_empty = os.path.isfile(file_path) and os.path.getsize(file_path) > 0
 
@@ -66,12 +72,9 @@ with open(file_path, "a") as f:
     for item in data_list:
         f.write(item + "\n")
 
-
-time.sleep(2)  
-
+time.sleep(2)
 print("Data saved.")
 
 time.sleep(2)
 input("Press Enter to exit...")
-
 #https://account.battle.net/login/en/?ref=localhost
