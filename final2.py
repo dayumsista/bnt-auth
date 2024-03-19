@@ -1,6 +1,5 @@
 import requests
 import time
-
 url = 'https://oauth.battle.net/oauth/sso'
 headers = {
     'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8'
@@ -14,17 +13,16 @@ data = {
 }
 response = requests.post(url, headers=headers, data=data)
 response_json = response.json()
-
 if 'error' in response_json and response_json['error'] == 'invalid_token':
-    print("Invalid SSO token!")
+    print("Invalid SSO token")
     exit()
-
 access_token = response_json.get('access_token')
 if not access_token:
-    print("Access token not found in the response.")
+    print("Access token Failed")
     exit()
 
 url = 'https://authenticator-rest-api.bnet-identity.blizzard.net/v1/authenticator/device'
+
 headers = {
     'accept': 'application/json',
     'Content-Type': 'application/json',
@@ -38,11 +36,13 @@ data = {
   "serial": serial  
 }
 
-response = requests.post(url, headers=headers)
+import requests
+response = requests.post(url, json=data, headers=headers)
 auth_response_json = response.json()
-serial = auth_response_json.get('serial')
-restoreCode = auth_response_json.get('restoreCode')
 deviceSecret = auth_response_json.get('deviceSecret')
+if not deviceSecret:
+    print("deviceSecret Failed")
+    exit()
 
 print(serial)
 print(restoreCode)
@@ -61,9 +61,7 @@ if getattr(sys, 'frozen', False):
     application_path = os.path.dirname(sys.executable)
 else:
     application_path = os.path.dirname(os.path.abspath(__file__))
-
 file_path = os.path.join(application_path, "bntAuth.txt")
-
 file_exists_and_not_empty = os.path.isfile(file_path) and os.path.getsize(file_path) > 0
 
 with open(file_path, "a") as f:
@@ -77,4 +75,3 @@ print("Data saved.")
 
 time.sleep(2)
 input("Press Enter to exit...")
-#https://account.battle.net/login/en/?ref=localhost
