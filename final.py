@@ -14,22 +14,36 @@ data = {
 response = requests.post(url, headers=headers, data=data)
 response_json = response.json()
 if 'error' in response_json and response_json['error'] == 'invalid_token':
-    print("Invalid SSO token!")
-    exit()
+    print("Invalid SSO token")
+    input("Press Enter to exit...")
 access_token = response_json.get('access_token')
-if not access_token:
-    print("Access token not found in the response.")
-    exit()
-url = "https://authenticator-rest-api.bnet-identity.blizzard.net/v1/authenticator"
+
+url = 'https://authenticator-rest-api.bnet-identity.blizzard.net/v1/authenticator/device'
+
 headers = {
-    "accept": "application/json",
+    'accept': 'application/json',
+    'Content-Type': 'application/json',
     "Authorization": f"Bearer {access_token}"  
 }
-response = requests.post(url, headers=headers)
+serial = input("Please enter your serial: ")
+restoreCode = input("Please enter your restoreCode: ")
+
+data = {
+  "restoreCode": restoreCode, 
+  "serial": serial  
+}
+
+import requests
+response = requests.post(url, json=data, headers=headers)
 auth_response_json = response.json()
-serial = auth_response_json.get('serial')
-restoreCode = auth_response_json.get('restoreCode')
 deviceSecret = auth_response_json.get('deviceSecret')
+if 'error2' in auth_response_json and auth_response_json['error2'] == 'invalid restore code':
+    print("Invalid invalid restore code")
+    input("Press Enter to exit...")
+if not deviceSecret:
+    print("deviceSecret Failed")
+    input("Press Enter to exit...")
+
 print(serial)
 print(restoreCode)
 print(deviceSecret)
@@ -47,9 +61,7 @@ if getattr(sys, 'frozen', False):
     application_path = os.path.dirname(sys.executable)
 else:
     application_path = os.path.dirname(os.path.abspath(__file__))
-
 file_path = os.path.join(application_path, "bntAuth.txt")
-
 file_exists_and_not_empty = os.path.isfile(file_path) and os.path.getsize(file_path) > 0
 
 with open(file_path, "a") as f:
