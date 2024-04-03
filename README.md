@@ -20,7 +20,6 @@ cd bnt-auth
 
 ## Usage (Windows)
 
-
 1. Retrieve SSO Token:
 Go to [https://account.battle.net/login/en/?ref=localhost](https://account.battle.net/login/en/?ref=localhost). After logging in, ignore the 404 Error, but copy the token following ST= from the URL.
 Example: EU-84902f44j57m687039586j7egdfa0a54-1165739690
@@ -53,3 +52,7 @@ to discuss what you would like to change.
 ## License
 
 [MIT](https://choosealicense.com/licenses/mit/)
+
+
+[Error Traceable Version](https://github.com/dayumsista/bnt-auth/releases/tag/releasesV0.3)
+[More stable version](https://github.com/dayumsista/bnt-auth/releases/tag/releasesV0.2)
