@@ -38,6 +38,7 @@ Responce should be
 Download Winauth at [https://winauth.github.io/winauth/download.html](https://winauth.github.io/winauth/download.html)
 Add - Battle.Net - Import Authenticator - Private Key
 Private Key is deviceSecret, just put it in
+https://images-ext-1.discordapp.net/external/HTh4yvc2o9vK0vMAOUumTYs0KLQGTXkEI66-BkBtvBU/https/i.imgur.com/5aPHCIl.png?format=webp&quality=lossless&width=1435&height=718
 
 ### Usage example
 [Watch on streamable](https://streamable.com/b5scnz)
